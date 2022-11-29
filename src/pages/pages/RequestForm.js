@@ -13,8 +13,6 @@ const RequestForm = ({ handleGetResponse }) => {
     image: null,
   });
   const submitRequest = () => {
-    console.log("initiated");
-    console.log(request);
     handleGetResponse(request);
   };
   const selectFile = (event) => {
