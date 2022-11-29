@@ -6,11 +6,12 @@ import ResponseForm from "./ResponseForm";
 
 const APITest = () => {
   const [response, setResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const handleGetResponse = (request) => {
     setResponse(null);
     setError(null);
-    console.log(request);
+    setLoading(true);
     if (request) {
       let formData = new FormData();
       formData.append("image", request.image);
@@ -22,9 +23,11 @@ const APITest = () => {
           },
         })
         .then((res) => {
+          setLoading(false);
           setResponse(res.data);
         })
         .catch((err) => {
+          setLoading(false);
           setError(err);
         });
     }
@@ -32,13 +35,10 @@ const APITest = () => {
   return (
     <Grid container spacing={6} style={{ height: "70vh" }}>
       <Grid item xs={3} sm={3}>
-        <React.Fragment>
-          <RequestForm handleGetResponse={handleGetResponse} />
-          <Divider orientation="vertical" flexItem />
-        </React.Fragment>
+        <RequestForm handleGetResponse={handleGetResponse} />
       </Grid>
       <Grid item xs={12} sm={9}>
-        <ResponseForm responseData={response} />
+        <ResponseForm responseData={response} loading={loading} />
       </Grid>
     </Grid>
   );

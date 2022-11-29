@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Button, Grid, TextField, Typography } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 
 const RequestForm = ({ handleGetResponse }) => {
   const [request, setRequest] = useState({
@@ -19,31 +25,33 @@ const RequestForm = ({ handleGetResponse }) => {
   };
 
   return (
-    <Grid container direction={"column"} spacing={6} style={{ height: "100%" }}>
-      <Grid item>
-        <Typography variant="h3" gutterBottom display="inline">
-          Request
-        </Typography>
+    <Container>
+      <Grid container direction={"column"} style={{ height: "100%" }}>
+        <Grid item>
+          <Typography variant="h3" gutterBottom>
+            Request
+          </Typography>
+        </Grid>
+        <Grid item>
+          <TextField
+            id="outlined-basic"
+            label="Name"
+            variant="outlined"
+            onChange={onNameChange}
+            fullWidth
+          />
+        </Grid>
+        <Grid item>
+          <Button variant="contained" component="label" onChange={selectFile}>
+            Upload File
+            <input type="file" hidden />
+          </Button>
+        </Grid>
+        <Grid item>
+          <button onClick={submitRequest}> Submit</button>
+        </Grid>
       </Grid>
-      <Grid item>
-        <TextField
-          id="outlined-basic"
-          label="Name"
-          variant="outlined"
-          onChange={onNameChange}
-          fullWidth
-        />
-      </Grid>
-      <Grid item>
-        <Button variant="contained" component="label" onChange={selectFile}>
-          Upload File
-          <input type="file" hidden />
-        </Button>
-      </Grid>
-      <Grid item>
-        <button onClick={submitRequest}> Submit</button>
-      </Grid>
-    </Grid>
+    </Container>
   );
 };
 export default RequestForm;

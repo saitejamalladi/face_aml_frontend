@@ -70,8 +70,8 @@ function UserDropdown() {
         open={Boolean(anchorMenu)}
         onClose={closeMenu}
       >
-        <MenuItem onClick={handleProfile}>Profile</MenuItem>
-        <MenuItem onClick={handleChangePassword}>Change Password</MenuItem>
+        {/*<MenuItem onClick={handleProfile}>Profile</MenuItem>*/}
+        {/*<MenuItem onClick={handleChangePassword}>Change Password</MenuItem>*/}
         <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
       </Menu>
     </React.Fragment>
