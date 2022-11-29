@@ -24,6 +24,10 @@ const RequestForm = ({ handleGetResponse }) => {
   };
   const selectFile = (event) => {
     setRequest({ ...request, image: event.target.files[0] });
+    console.log(event.target.files[0]);
+  };
+  const getObjectURL = (selectedFile) => {
+    return URL.createObjectURL(selectedFile);
   };
   const onNameChange = (event) => {
     setRequest({ ...request, name: event.target.value });
@@ -45,12 +49,16 @@ const RequestForm = ({ handleGetResponse }) => {
               onChange={onNameChange}
               fullWidth
             />
-            <Spacer mb={6} />
+            <Spacer mb={3} />
             <Button variant="contained" component="label" onChange={selectFile}>
               {request.image ? request.image.name : "Click to upload the image"}
               <input type="file" hidden />
             </Button>
-            <Spacer mb={6} />
+            <Spacer mb={3} />
+            {request.image && (
+              <img src={getObjectURL(request.image)} alt={"test"} />
+            )}
+            <Spacer mb={3} />
             <Button
               color={"primary"}
               variant="contained"

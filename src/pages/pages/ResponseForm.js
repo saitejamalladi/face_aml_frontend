@@ -79,7 +79,7 @@ const ResponseForm = ({ responseData, loading }) => {
           Result
         </Typography>
 
-        <Grid container spacing={6}>
+        <Grid container spacing={6} alignContent={"center"}>
           <Grid item xs={"auto"}>
             <Typography variant="h6" gutterBottom>
               Transaction Id :
@@ -90,25 +90,23 @@ const ResponseForm = ({ responseData, loading }) => {
               {responseData?.transaction_id || "No data yet"}
             </Typography>
           </Grid>
+          {responseData && responseData.transaction_id && (
+            <Grid item>
+              <Button
+                variant={"contained"}
+                startIcon={<DownloadIcon />}
+                color={"primary"}
+                onClick={exportData}
+              >
+                Download Json
+              </Button>
+            </Grid>
+          )}
         </Grid>
         <Grid container direction={"column"} spacing={6}>
           {loading && <Loader />}
           {responseData && responseData.transaction_id && (
             <React.Fragment>
-              <Grid item>
-                <Grid container direction={"row-reverse"} spacing={4}>
-                  <Grid item>
-                    <Button
-                      variant={"contained"}
-                      startIcon={<DownloadIcon />}
-                      color={"primary"}
-                      onClick={exportData}
-                    >
-                      Download Json
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Grid>
               <Grid item>
                 <Typography variant="h3" gutterBottom display="inline">
                   Matched Faces
