@@ -8,11 +8,9 @@ import { Button as MuiButton, Typography } from "@material-ui/core";
 import { spacing } from "@material-ui/system";
 import { signOut } from "../../redux/actions/authActions";
 
-
 import { useHistory } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { AUTH_TOKEN, PERMISSIONS } from "../../constants";
-
 
 const Button = styled(MuiButton)(spacing);
 
@@ -26,14 +24,13 @@ const Wrapper = styled.div`
   }
 `;
 
-
-
 function Page403() {
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
   const handleSignOut = async () => {
     localStorage.removeItem(AUTH_TOKEN);
+    localStorage.removeItem("username");
     localStorage.removeItem(PERMISSIONS);
     await dispatch(signOut());
     history.push("/auth/sign-in");
@@ -46,7 +43,7 @@ function Page403() {
         403
       </Typography>
       <Typography component="h2" variant="h5" align="center" gutterBottom>
-       Forbidden
+        Forbidden
       </Typography>
       <Typography component="h2" variant="body1" align="center" gutterBottom>
         You do not have access to view this page.

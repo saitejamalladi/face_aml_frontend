@@ -1,11 +1,18 @@
 import React, { useState } from "react";
+import styled from "styled-components/macro";
 import {
   Button,
-  Container,
-  Grid,
+  Card as MuiCard,
+  CardContent,
   TextField,
   Typography,
 } from "@material-ui/core";
+
+import { spacing } from "@material-ui/system";
+
+const Card = styled(MuiCard)(spacing);
+
+const Spacer = styled.div(spacing);
 
 const RequestForm = ({ handleGetResponse }) => {
   const [request, setRequest] = useState({
@@ -23,33 +30,39 @@ const RequestForm = ({ handleGetResponse }) => {
   };
 
   return (
-    <Container>
-      <Grid container direction={"column"} style={{ height: "100%" }}>
-        <Grid item>
-          <Typography variant="h3" gutterBottom>
-            Request
-          </Typography>
-        </Grid>
-        <Grid item>
-          <TextField
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-            onChange={onNameChange}
-            fullWidth
-          />
-        </Grid>
-        <Grid item>
-          <Button variant="contained" component="label" onChange={selectFile}>
-            Upload File
-            <input type="file" hidden />
-          </Button>
-        </Grid>
-        <Grid item>
-          <button onClick={submitRequest}> Submit</button>
-        </Grid>
-      </Grid>
-    </Container>
+    <Card mb={6} style={{ height: "100%" }}>
+      <CardContent>
+        <Typography variant="h3" gutterBottom>
+          Request
+        </Typography>
+        <Card mb={6}>
+          <CardContent>
+            <TextField
+              id="outlined-basic"
+              label="Name"
+              variant="outlined"
+              placeholder={"Enter the name"}
+              onChange={onNameChange}
+              fullWidth
+            />
+            <Spacer mb={6} />
+            <Button variant="contained" component="label" onChange={selectFile}>
+              {request.image ? request.image.name : "Click to upload the image"}
+              <input type="file" hidden />
+            </Button>
+            <Spacer mb={6} />
+            <Button
+              color={"primary"}
+              variant="contained"
+              onClick={submitRequest}
+              disabled={!request.name || !request.image}
+            >
+              Submit
+            </Button>
+          </CardContent>
+        </Card>
+      </CardContent>
+    </Card>
   );
 };
 export default RequestForm;

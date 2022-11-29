@@ -31,9 +31,15 @@ export function authInit() {
 export function signIn(credentials) {
   return async (dispatch) => {
     dispatch({ type: types.AUTH_SIGN_IN_REQUEST });
-    
+
     return authSignIn(credentials)
       .then((response) => {
+        localStorage.setItem(
+          "username",
+          response.first_name + " " + response.last_name
+        );
+        localStorage.setItem("role", "Admin");
+
         dispatch({
           type: types.AUTH_SIGN_IN_SUCCESS,
           email: response.email,

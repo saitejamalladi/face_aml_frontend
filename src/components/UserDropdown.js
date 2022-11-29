@@ -60,8 +60,8 @@ function UserDropdown() {
           onClick={toggleMenu}
           color="inherit"
         >
-          <ProfileName>{user.name}</ProfileName>
-          <ProfileRole>{user.role}</ProfileRole>
+          <ProfileName>{localStorage.getItem("username")}</ProfileName>
+          <ProfileRole>{localStorage.getItem("role")}</ProfileRole>
         </Button>
       </Tooltip>
       <Menu

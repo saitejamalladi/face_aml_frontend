@@ -33,8 +33,8 @@ const APITest = () => {
     }
   };
   return (
-    <Grid container spacing={6} style={{ height: "70vh" }}>
-      <Grid item xs={3} sm={3}>
+    <Grid container spacing={4} style={{ minHeight: "75vh" }}>
+      <Grid item xs={12} sm={3}>
         <RequestForm handleGetResponse={handleGetResponse} />
       </Grid>
       <Grid item xs={12} sm={9}>

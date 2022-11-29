@@ -53,9 +53,8 @@ const AppContent = styled.div`
   max-width: 100%;
 `;
 
-const Paper = styled(MuiPaper)(spacing);
-
-const MainContent = styled(Paper)`
+const MainContent = styled(MuiPaper)`
+  padding: 16px;
   flex: 1;
   background: ${(props) => props.theme.palette.background.default};
 
