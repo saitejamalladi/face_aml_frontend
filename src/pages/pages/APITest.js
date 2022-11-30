@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Divider, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import axios from "axios";
 import RequestForm from "./RequestForm";
 import ResponseForm from "./ResponseForm";
@@ -33,12 +33,16 @@ const APITest = () => {
     }
   };
   return (
-    <Grid container spacing={4} style={{ minHeight: "75vh" }}>
+    <Grid container spacing={4}>
       <Grid item xs={12} sm={3}>
         <RequestForm handleGetResponse={handleGetResponse} />
       </Grid>
       <Grid item xs={12} sm={9}>
-        <ResponseForm responseData={response} loading={loading} />
+        <ResponseForm
+          transactionId={response?.transaction_id}
+          responseData={response?.res_data}
+          loading={loading}
+        />
       </Grid>
     </Grid>
   );

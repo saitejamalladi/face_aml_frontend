@@ -54,7 +54,7 @@ const AppContent = styled.div`
 `;
 
 const MainContent = styled(MuiPaper)`
-  padding: 16px;
+  padding: 8px;
   flex: 1;
   background: ${(props) => props.theme.palette.background.default};
 

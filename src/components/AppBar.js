@@ -21,13 +21,6 @@ const AppBar = styled(MuiAppBar)`
   color: ${(props) => props.theme.header.color};
 `;
 
-const IconButton = styled(MuiIconButton)`
-  svg {
-    width: 22px;
-    height: 22px;
-  }
-`;
-
 const Brand = styled(ListItem)`
   font-size: ${(props) => props.theme.typography.h5.fontSize};
   font-weight: ${(props) => props.theme.typography.fontWeightMedium};
@@ -49,9 +42,9 @@ const BrandImage = styled.img`
   display: block;
 `;
 
-const AppBarComponent = ({ onDrawerToggle }) => (
+const AppBarComponent = () => (
   <React.Fragment>
-    <AppBar position="sticky" elevation={0}>
+    <AppBar position="static" elevation={2}>
       <Toolbar>
         <Grid container justify={"space-between"} alignItems="center">
           <Grid item xs={"auto"}>

@@ -1,196 +1,84 @@
 import React from "react";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  // Collapse,
-  Container,
-  Divider,
-  Grid,
-  IconButton,
-  TextField,
-  Typography,
-} from "@material-ui/core";
-import styled from "styled-components/macro";
+import { Grid, Typography } from "@material-ui/core";
 
-import { Download as DownloadIcon } from "react-feather";
-import { red } from "@material-ui/core/colors";
-// import JSONPretty from "react-json-pretty";
 import "react-json-pretty/themes/monikai.css";
-import Loader from "./Loader";
+import PaperComponent from "./papercontent/PaperContent";
+import Loader from "./papercontent/Loader";
+import DisplayProfile from "./DisplayProfile";
+import styled from "styled-components/macro";
 import { spacing } from "@material-ui/system";
 
 const Spacer = styled.div(spacing);
 
-const ResponseForm = ({ responseData, loading }) => {
-  // const [expanded, setExpanded] = React.useState(false);
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
-
-  const exportData = () => {
-    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-      JSON.stringify(responseData)
-    )}`;
-    const link = document.createElement("a");
-    link.href = jsonString;
-    link.download = "data.json";
-
-    link.click();
-  };
-  // Function will execute on click of button
-  const onPDFDownload = (url, name) => {
-    if (url) {
-      // using Java Script method to get PDF file
-      fetch(
-        "https://face-aml-target-image-collection.s3.amazonaws.com/sample.pdf"
-      ).then((response) => {
-        response.blob().then((blob) => {
-          // Creating new object of PDF file
-          const fileURL = window.URL.createObjectURL(blob);
-          // Setting various property values
-          let alink = document.createElement("a");
-          alink.href = fileURL;
-          alink.download = `${name}.pdf`;
-          alink.click();
-        });
-      });
-    }
-  };
-
-  // const ExpandMore = styled((props) => {
-  //   const { expand, ...other } = props;
-  //   return <IconButton {...other} />;
-  // })(({ theme, expand }) => ({
-  //   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  //   marginLeft: "auto",
-  //   transition: theme.transitions.create("transform", {
-  //     duration: theme.transitions.duration.shortest,
-  //   }),
-  // }));
-  return (
-    <Card mb={6} style={{ height: "100%" }}>
-      <CardContent>
-        <Typography variant="h3" gutterBottom>
-          Result
-        </Typography>
-
-        <Grid container spacing={6} alignContent={"center"}>
-          <Grid item xs={"auto"}>
-            <Typography variant="h6" gutterBottom>
-              Transaction Id :
-            </Typography>
-          </Grid>
-          <Grid item xs={7}>
-            <Typography variant="body1" gutterBottom>
-              {responseData?.transaction_id || "No data yet"}
-            </Typography>
-          </Grid>
-          {responseData && responseData.transaction_id && (
-            <Grid item>
-              <Button
-                variant={"contained"}
-                startIcon={<DownloadIcon />}
-                color={"primary"}
-                onClick={exportData}
+const ResponseForm = ({ transactionId, responseData, loading }) => {
+  if (responseData) {
+    return (
+      <PaperComponent
+        heading={"Result"}
+        description={`Transaction Id :${transactionId}`}
+      >
+        {responseData?.faceCount > 0 ? (
+          <React.Fragment>
+            {responseData.matchedFaces.length > 0 && (
+              <PaperComponent
+                heading={"Matched Faces"}
+                description={
+                  "The Customer face matched with the Listed Individual face"
+                }
               >
-                Download Json
-              </Button>
-            </Grid>
-          )}
-        </Grid>
-        <Grid container direction={"column"} spacing={6}>
-          {loading && <Loader />}
-          {responseData && responseData.transaction_id && (
-            <React.Fragment>
-              <Grid item>
-                <Typography variant="h3" gutterBottom display="inline">
-                  Matched Faces
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Grid container spacing={3}>
-                  {responseData.res_data && responseData.res_data.length > 0 ? (
-                    responseData.res_data.map((face, index) => (
-                      <Grid item xs={4} key={index}>
-                        <Card sx={{ maxWidth: 345 }}>
-                          <CardHeader
-                            avatar={
-                              <Avatar
-                                sx={{ bgcolor: red[500] }}
-                                aria-label="profile"
-                              >
-                                {face.name[0]}
-                              </Avatar>
-                            }
-                            title={face.name}
-                            subheader={`Similarity Score : ${face.similarity.toFixed(
-                              2
-                            )}`}
-                          />
-                          <CardMedia
-                            component="img"
-                            height="220"
-                            image={`https://${face.bucket}.s3.amazonaws.com/${face.face_image}`}
-                            alt="green iguana"
-                          />
-                          <CardContent>
-                            <Typography variant="body2" color="text.secondary">
-                              {face.remarks}
-                            </Typography>
-                          </CardContent>
-                          <CardActions>
-                            <Button
-                              size="small"
-                              color={"primary"}
-                              onClick={() =>
-                                window.open(face.web_link, "_blank")
-                              }
-                            >
-                              Learn More
-                            </Button>
-                            <Button
-                              size="small"
-                              color={"primary"}
-                              onClick={() =>
-                                onPDFDownload(face.weblink_pdf, face.name)
-                              }
-                            >
-                              Download Pdf
-                            </Button>
-                            {/*<ExpandMore*/}
-                            {/*  expand={expanded}*/}
-                            {/*  onClick={handleExpandClick}*/}
-                            {/*  aria-expanded={expanded}*/}
-                            {/*  aria-label="show more"*/}
-                            {/*>*/}
-                            {/*  <ExpandMoreIcon />*/}
-                            {/*</ExpandMore>*/}
-                          </CardActions>
-                          {/*<Collapse in={expanded} timeout="auto" unmountOnExit>*/}
-                          {/*  <CardContent>*/}
-                          {/*    <JSONPretty data={face} />*/}
-                          {/*  </CardContent>*/}
-                          {/*</Collapse>*/}
-                        </Card>
-                      </Grid>
-                    ))
-                  ) : (
-                    <Grid item xs={4}>
-                      <div>No Faces matched with the given inputs</div>
+                <Grid container spacing={3} alignContent={"center"}>
+                  {responseData.matchedFaces.map((face, index) => (
+                    <Grid item xs={4} key={index}>
+                      <DisplayProfile face={face} />
                     </Grid>
-                  )}
+                  ))}
                 </Grid>
-              </Grid>
-            </React.Fragment>
-          )}
-        </Grid>
-      </CardContent>
-    </Card>
+              </PaperComponent>
+            )}
+            {responseData.unMatchedFaces.length > 0 && (
+              <PaperComponent
+                heading={"Unmatched Faces"}
+                description={
+                  "The Customer face DOESN’T match with the Listed Individual face"
+                }
+              >
+                <Grid container spacing={3} alignContent={"center"}>
+                  {responseData.unMatchedFaces.map((face, index) => (
+                    <Grid item xs={4} key={index}>
+                      <DisplayProfile face={face} />
+                    </Grid>
+                  ))}
+                </Grid>
+              </PaperComponent>
+            )}
+          </React.Fragment>
+        ) : (
+          <Grid
+            container
+            direction={"column-reverse"}
+            alignContent={"center"}
+            alignItems={"center"}
+            style={{ height: "100px" }}
+          >
+            <Grid item>
+              <Spacer mb={3} />
+              <Typography variant="body2" gutterBottom color={"primary"}>
+                FaceAML doesn't have a face in the database for the Listed
+                Individual
+              </Typography>
+            </Grid>
+          </Grid>
+        )}
+      </PaperComponent>
+    );
+  }
+  return (
+    <PaperComponent
+      heading={"Result"}
+      description={`Transaction Id :No data yet`}
+    >
+      {loading && <Loader />}
+    </PaperComponent>
   );
 };
 export default ResponseForm;
