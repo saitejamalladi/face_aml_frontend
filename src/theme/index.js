@@ -22,7 +22,7 @@ const createTheme = (name) => {
       props: props,
       typography: typography,
       shadows: shadows,
-      // palette: themeConfig.palette,
+      palette: themeConfig.palette,
     },
     {
       name: themeConfig.name,

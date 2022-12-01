@@ -13,7 +13,7 @@ import { red } from "@material-ui/core/colors";
 
 const DisplayProfile = ({ face }) => {
   // Function will execute on click of button
-  const onPDFDownload = (webLink, name) => {
+  const onPDFDownload = (webLink) => {
     if (webLink) {
       // using Java Script method to get PDF file
       fetch(
@@ -23,10 +23,12 @@ const DisplayProfile = ({ face }) => {
           // Creating new object of PDF file
           const fileURL = window.URL.createObjectURL(blob);
           // Setting various property values
-          let alink = document.createElement("a");
-          alink.href = fileURL;
-          alink.download = `${name}.pdf`;
-          alink.click();
+          // let alink = document.createElement("a");
+          // alink.href = fileURL;
+          // alink.download = `${name}.pdf`;
+          // alink.click();
+          const pdfWindow = window.open();
+          pdfWindow.location.href = fileURL;
         });
       });
     }
@@ -45,13 +47,12 @@ const DisplayProfile = ({ face }) => {
       />
       <CardMedia
         component="img"
-        height="220"
         image={`https://${face.bucket}.s3.amazonaws.com/${face.face_image}`}
         alt="green iguana"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Remarks
+          Listed Individual Details
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {face.remarks}
@@ -63,14 +64,14 @@ const DisplayProfile = ({ face }) => {
           color={"primary"}
           onClick={() => window.open(face.web_link, "_blank")}
         >
-          Learn More
+          Source Web Link
         </Button>
         <Button
           size="small"
           color={"primary"}
-          onClick={() => onPDFDownload(face.weblink_pdf, face.name)}
+          onClick={() => onPDFDownload(face.weblink_pdf)}
         >
-          Download Pdf
+          View Pdf
         </Button>
       </CardActions>
     </Card>

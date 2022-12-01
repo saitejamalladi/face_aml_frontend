@@ -6,8 +6,10 @@ export const MainDiv = styled(Paper)`
   padding: 1.2rem;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.13);
   border-radius: 16px;
+  padding-bottom: 0.5rem;
   margin: 1.5rem 0 0rem 0;
-  padding-bottom: 2.5rem;
+  height: 90%;
+  overflow-y: hidden;
 `;
 
 export const Heading = styled.h1`

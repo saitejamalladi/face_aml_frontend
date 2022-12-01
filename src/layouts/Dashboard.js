@@ -56,14 +56,12 @@ const AppContent = styled.div`
 const MainContent = styled(MuiPaper)`
   padding: 8px;
   flex: 1;
-  background: ${(props) => props.theme.palette.background.default};
+  background: #22334d;
+  border-radius: 0;
+  min-height: 80%;
 
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     flex: none;
-  }
-
-  .MuiPaper-root .MuiPaper-root {
-    box-shadow: none;
   }
 `;
 

@@ -8,6 +8,7 @@ import {
   IconButton as MuiIconButton,
   Toolbar,
   ListItem,
+  Typography,
 } from "@material-ui/core";
 
 import { Menu as MenuIcon } from "@material-ui/icons";
@@ -17,8 +18,7 @@ import AccountDisplay from "./AccountDisplay";
 import { NavLink } from "react-router-dom";
 
 const AppBar = styled(MuiAppBar)`
-  background: ${(props) => props.theme.header.background};
-  color: ${(props) => props.theme.header.color};
+  background: #22334d;
 `;
 
 const Brand = styled(ListItem)`
@@ -53,6 +53,7 @@ const AppBarComponent = () => (
                 alt={`FACE AML Admin`}
                 src={`/static/img/brands/brand-logo.jpg`}
               />{" "}
+              <Typography variant={"h4"}>Screening</Typography>
             </Brand>
           </Grid>
           <Grid item xs={"auto"}>

@@ -33,7 +33,7 @@ const RequestForm = ({ handleGetResponse }) => {
   };
   const getObjectURL = (selectedFile) => {
     if (selectedFile) return URL.createObjectURL(selectedFile);
-    return "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg";
+    return "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
   };
   const onNameChange = (event) => {
     setRequest({ ...request, name: event.target.value });
@@ -44,7 +44,7 @@ const RequestForm = ({ handleGetResponse }) => {
       heading={"Request"}
       description={`Enter the name and upload the image to get the results`}
     >
-      <Card mb={6}>
+      <Card mb={6} style={{ minHeight: "80%" }}>
         <CardContent>
           <TextField
             id="outlined-basic"
@@ -60,14 +60,7 @@ const RequestForm = ({ handleGetResponse }) => {
             <input type="file" hidden />
           </Button>
           <Spacer mb={3} />
-          {
-            <img
-              src={getObjectURL(request.image)}
-              alt={"test"}
-              width={"100%"}
-              height={"200px"}
-            />
-          }
+          {<img src={getObjectURL(request.image)} alt={"test"} width={"75%"} />}
           <Spacer mb={3} />
           <Grid container direction={"row-reverse"}>
             <Grid item>

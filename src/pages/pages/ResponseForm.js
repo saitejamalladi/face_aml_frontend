@@ -9,6 +9,9 @@ import styled from "styled-components/macro";
 import { spacing } from "@material-ui/system";
 
 const Spacer = styled.div(spacing);
+const PinkTypography = styled(Typography)`
+  color: #d414aa;
+`;
 
 const ResponseForm = ({ transactionId, responseData, loading }) => {
   if (responseData) {
@@ -20,54 +23,53 @@ const ResponseForm = ({ transactionId, responseData, loading }) => {
         {responseData?.faceCount > 0 ? (
           <React.Fragment>
             {responseData.matchedFaces.length > 0 && (
-              <PaperComponent
-                heading={"Matched Faces"}
-                description={
-                  "The Customer face matched with the Listed Individual face"
-                }
-              >
+              <React.Fragment>
+                <Typography display="inline">
+                  The Customer Face{" "}
+                  <PinkTypography display="inline">Matched</PinkTypography> with
+                  the Listed Individual face
+                </Typography>
+
                 <Grid container spacing={3} alignContent={"center"}>
                   {responseData.matchedFaces.map((face, index) => (
                     <Grid item xs={4} key={index}>
+                      <Spacer mb={3} />
                       <DisplayProfile face={face} />
                     </Grid>
                   ))}
                 </Grid>
-              </PaperComponent>
+              </React.Fragment>
             )}
             {responseData.unMatchedFaces.length > 0 && (
-              <PaperComponent
-                heading={"Unmatched Faces"}
-                description={
-                  "The Customer face DOESN’T match with the Listed Individual face"
-                }
-              >
+              <React.Fragment>
+                <Typography display="inline">
+                  The Customer Face{" "}
+                  <PinkTypography display="inline">
+                    Doesn’t Match{" "}
+                  </PinkTypography>{" "}
+                  with the Listed Individual face
+                </Typography>
                 <Grid container spacing={3} alignContent={"center"}>
                   {responseData.unMatchedFaces.map((face, index) => (
                     <Grid item xs={4} key={index}>
+                      <Spacer mb={3} />
                       <DisplayProfile face={face} />
                     </Grid>
                   ))}
                 </Grid>
-              </PaperComponent>
+              </React.Fragment>
             )}
           </React.Fragment>
         ) : (
-          <Grid
-            container
-            direction={"column-reverse"}
-            alignContent={"center"}
-            alignItems={"center"}
-            style={{ height: "100px" }}
-          >
-            <Grid item>
-              <Spacer mb={3} />
-              <Typography variant="body2" gutterBottom color={"primary"}>
-                FaceAML doesn't have a face in the database for the Listed
-                Individual
-              </Typography>
-            </Grid>
-          </Grid>
+          <React.Fragment>
+            <Spacer mb={3} />
+            <PinkTypography variant="p" gutterBottom color={"red"}>
+              No Face{" "}
+            </PinkTypography>
+            <Typography variant="p" gutterBottom color={"primary"}>
+              found in the database
+            </Typography>
+          </React.Fragment>
         )}
       </PaperComponent>
     );
