@@ -31,7 +31,7 @@ function App() {
   return (
     <React.Fragment>
       <HelmetProvider>
-        <Helmet titleTemplate="%s | Face AML" defaultTitle="FACE AML" />
+        <Helmet titleTemplate="%s | Regulo" defaultTitle="Regulo" />
         <StylesProvider jss={jss}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <MuiThemeProvider theme={createTheme(theme.currentTheme)}>

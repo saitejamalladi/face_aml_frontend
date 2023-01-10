@@ -9,7 +9,7 @@ export const MainDiv = styled(Paper)`
   padding-bottom: 0.5rem;
   margin: 1.5rem 0 0rem 0;
   height: 90%;
-  overflow-y: hidden;
+  overflow-y: scroll;
 `;
 
 export const Heading = styled.h1`

@@ -39,8 +39,9 @@ const BrandTitle = styled(Typography)`
 `;
 
 const BrandImage = styled.img`
-  max-width: 70px;
+  max-width: 120px;
   margin-right: ${(props) => props.theme.spacing(2)}px;
+  margin-bottom: ${(props) => props.theme.spacing(2)}px;
   height: auto;
   display: block;
   text-align: center;
@@ -72,9 +73,10 @@ function SignIn() {
     <Wrapper>
       <Helmet title="Sign In" />
       <Grid container direction={"column"} justify="center" alignItems="center">
-        <BrandTitle variant="body1" gutterBottom>
-          Face AML
-        </BrandTitle>
+        <BrandImage
+          alt={`Regulo`}
+          src={`/static/img/brands/brand-logo-alt.jpg`}
+        />
       </Grid>
       <Typography component="h2" variant="body1" align="center">
         Sign in to your account to continue

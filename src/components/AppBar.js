@@ -50,10 +50,9 @@ const AppBarComponent = () => (
           <Grid item xs={"auto"}>
             <Brand component={NavLink} to="/" button>
               <BrandImage
-                alt={`FACE AML Admin`}
+                alt={`Regulo`}
                 src={`/static/img/brands/brand-logo.jpg`}
               />{" "}
-              <Typography variant={"h4"}>Screening</Typography>
             </Brand>
           </Grid>
           <Grid item xs={"auto"}>

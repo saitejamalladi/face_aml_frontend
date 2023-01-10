@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography as MuiTypography } from "@material-ui/core";
 
 import "react-json-pretty/themes/monikai.css";
 import PaperComponent from "./papercontent/PaperContent";
@@ -9,6 +9,10 @@ import styled from "styled-components/macro";
 import { spacing } from "@material-ui/system";
 
 const Spacer = styled.div(spacing);
+
+const Typography = styled(MuiTypography)`
+  font-size: 2rem;
+`;
 const PinkTypography = styled(Typography)`
   color: #d414aa;
 `;
@@ -25,9 +29,9 @@ const ResponseForm = ({ transactionId, responseData, loading }) => {
             {responseData.matchedFaces.length > 0 && (
               <React.Fragment>
                 <Typography display="inline">
-                  The Customer Face{" "}
-                  <PinkTypography display="inline">Matched</PinkTypography> with
-                  the Listed Individual face
+                  The customer face{" "}
+                  <PinkTypography display="inline">matched</PinkTypography> with
+                  the listed individual face
                 </Typography>
 
                 <Grid container spacing={3} alignContent={"center"}>
@@ -43,11 +47,11 @@ const ResponseForm = ({ transactionId, responseData, loading }) => {
             {responseData.unMatchedFaces.length > 0 && (
               <React.Fragment>
                 <Typography display="inline">
-                  The Customer Face{" "}
+                  The customer face{" "}
                   <PinkTypography display="inline">
-                    Doesn’t Match{" "}
+                    doesn’t match{" "}
                   </PinkTypography>{" "}
-                  with the Listed Individual face
+                  with the listed individual face
                 </Typography>
                 <Grid container spacing={3} alignContent={"center"}>
                   {responseData.unMatchedFaces.map((face, index) => (
