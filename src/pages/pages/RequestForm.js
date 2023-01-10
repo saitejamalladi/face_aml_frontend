@@ -22,6 +22,9 @@ const CardContent = styled(MuiCardContent)`
 const RequestForm = ({ handleGetResponse }) => {
   const [request, setRequest] = useState({
     name: "",
+    type: "Person",
+    dob: new Date(),
+    nationality: "",
     image: null,
   });
   const submitRequest = () => {
@@ -36,6 +39,15 @@ const RequestForm = ({ handleGetResponse }) => {
     return "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png";
   };
   const onNameChange = (event) => {
+    setRequest({ ...request, name: event.target.value });
+  };
+  const onTypeChange = (event) => {
+    setRequest({ ...request, name: event.target.value });
+  };
+  const onDOBChange = (event) => {
+    setRequest({ ...request, name: event.target.value });
+  };
+  const onNationalityChange = (event) => {
     setRequest({ ...request, name: event.target.value });
   };
 
@@ -55,8 +67,37 @@ const RequestForm = ({ handleGetResponse }) => {
             fullWidth
           />
           <Spacer mb={3} />
+          <TextField
+            id="outlined-basic"
+            label="Type"
+            variant="outlined"
+            placeholder={"Enter the Type"}
+            onChange={onNameChange}
+            fullWidth
+          />
+          <Spacer mb={3} />
+          <TextField
+            id="outlined-basic"
+            label="Date of Birth"
+            variant="outlined"
+            placeholder={"Enter the dob"}
+            onChange={onNameChange}
+            fullWidth
+          />
+          <Spacer mb={3} />
+          <TextField
+            id="outlined-basic"
+            label="Nationality"
+            variant="outlined"
+            placeholder={"Enter the nationality"}
+            onChange={onNameChange}
+            fullWidth
+          />
+          <Spacer mb={3} />
           <Button variant="contained" component="label" onChange={selectFile}>
-            {request.image ? request.image.name : "Click to upload the image"}
+            {request.image
+              ? request.image.name
+              : "Click to upload the customer image"}
             <input type="file" hidden />
           </Button>
           <Spacer mb={3} />

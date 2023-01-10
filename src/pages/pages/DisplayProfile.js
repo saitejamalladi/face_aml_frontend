@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 
-const DisplayProfile = ({ face }) => {
+const DisplayProfile = ({ face, row }) => {
   // Function will execute on click of button
   const onPDFDownload = (webLink) => {
     if (webLink) {
@@ -33,7 +33,6 @@ const DisplayProfile = ({ face }) => {
       });
     }
   };
-
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -43,12 +42,13 @@ const DisplayProfile = ({ face }) => {
           </Avatar>
         }
         title={face.name}
-        subheader={`Similarity Score : ${face.similarity.toFixed(2)}`}
+        subheader={`Similarity Score : ${row.face_match_score.toFixed(2)}`}
       />
       <CardMedia
         component="img"
-        image={`https://${face.bucket}.s3.amazonaws.com/${face.face_image}`}
+        image={`https://${row.bucket}.s3.amazonaws.com/${face.face_image}`}
         alt="green iguana"
+        width={"80%"}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

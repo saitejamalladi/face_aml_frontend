@@ -17,7 +17,7 @@ const APITest = () => {
       formData.append("image", request.image);
       formData.append("name", request.name);
       axios
-        .post("http://54.169.223.189:8080/api/face-aml", formData, {
+        .post("http://54.169.223.189:9090/api/face-aml", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
